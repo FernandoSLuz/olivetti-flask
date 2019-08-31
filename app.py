@@ -21,8 +21,8 @@ def index():
     context = {
         'title':'Hacka | Update'
     }
-    #return flask.render_template('index.html')
-    return context
+    return flask.render_template('index.html')
+    #return context
 
 if __name__ == "__main__":
 
