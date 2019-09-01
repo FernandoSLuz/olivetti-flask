@@ -52,9 +52,9 @@ def sendMessageToLeader(leader, requester):
 
     res = req.request("POST", url, data=payload, headers=headers)
     res.json() if res.status_code == 200 else []
-    print(res.json())
+    #print(res.json())
 def sendMessage(userTosendMessage, messageBody):
-    print(userTosendMessage.telefone + " -- " + messageBody)
+    #print(userTosendMessage.telefone + " -- " + messageBody)
     url = "https://api.wassenger.com/v1/messages"
 
 
@@ -66,7 +66,7 @@ def sendMessage(userTosendMessage, messageBody):
 
     res = req.request("POST", url, data=payload, headers=headers)
     res.json() if res.status_code == 200 else []
-    print(res.json())
+    #print(res.json())
     
 def returnMessage(tempUserStep, recievedMessage):
     if(tempUserStep.passo == ''):
@@ -83,7 +83,7 @@ def returnMessage(tempUserStep, recievedMessage):
     elif tempUserStep.passo == 'B3':
         tempUserStep.setor = bd.SelectSetores_Unique(int(recievedMessage))
         updateUserStep(tempUserStep)
-        print(tempUserStep.setor)
+        #print(tempUserStep.setor)
         sendMessage(tempUserStep, "Obrigado pelas confirmacoes, "+tempUserStep.nome_funcionario+". \\n Agora, voce poderia me dizer em qual loja trabalha?" + "\\n" + bd.SelectLojas(tempUserStep.setor))
         tempUserStep.passo = "B4"
     elif tempUserStep.passo == 'B4':
@@ -124,7 +124,7 @@ def returnMessage(tempUserStep, recievedMessage):
 def webhook():
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
-    print(res)
+    #print(res)
     recievedPhoneStr = str(form['data']['fromNumber'])
     recievedMessage = str(form['data']['body'])
     tempUserStep = processNumber(recievedPhoneStr)
