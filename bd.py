@@ -58,10 +58,19 @@ class RequisicoesDePromocoes(db.Model):
 
 
 ######################### CRUDE OPERATIONS #############################
-def checkIfUserExists(tempPhoneNumber):
-    data_user = Funcionarios.query.filter_by(telefone=tempPhoneNumber).all()
-    print("result len", len(data_user))
-    print(data_user.nome_funcionario + " ---------------- ")
+def checkIfUserExists(tempUser):
+    data_user = Funcionarios.query.filter_by(telefone=tempUser.telefone).all()
+    if(len(data_user)==0):
+        tempUser.passo = "B1"
+        print("número não existe no banco, realizando pré cadastro")
+        return tempUser
+    else:
+        tempUser.passo = "A1"
+        tempUser.telefone = data_user[0].telefone
+        tempUser.nome_funcionario = data_user[0].nome_funcionario
+        tempUser.loja = data_user[0].loja
+        print("número existe no banco, realizando perguntas")
+        return tempUser
 
 def insertFuncionario():
     data = Funcionarios(input('Digite o nome do funcionario: '), input('Digite o nome da loja: '), input('Digite o cargo: '), 

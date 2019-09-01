@@ -57,7 +57,7 @@ def sendMessage(userTosendMessage, messageBody):
     
 def returnMessage(tempUserStep, recievedMessage):
     if(tempUserStep.passo == ''):
-        bd.checkIfUserExists(tempUserStep.telefone)
+        bd.checkIfUserExists(tempUserStep)
     #print("*** Lenght = " + str(len(UserSteps))+ "*********** " + tempUserStep.telefone + " ********** " + tempUserStep.passo)
     if tempUserStep.passo == 'B1':
         sendMessage(tempUserStep, "Ola! Informe seu nome completo, por favor:")
