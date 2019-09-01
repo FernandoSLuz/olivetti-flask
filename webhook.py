@@ -31,22 +31,41 @@ def processNumber(numberRecieved):
     UserSteps.append(tempUserStep)
     return tempUserStep
 
+def sendMessage(userTosendMessage, messageBody):
+    print("")
+    url = "https://api.wassenger.com/v1/messages"
+    data = {
+        'phone': userTosendMessage.phone,
+        'message': messageBody
+    }
+    headers = {
+    'content-type': "application/json",
+    'token': "<api token goes here>"
+    }
+
+    requests.request("POST", url, data=data, headers=headers)
+
+    
 def returnMessage(tempUserStep):
-    print("*** Lenght = " + str(len(UserSteps))+ "*********** " + tempUserStep.telefone + " ********** " + tempUserStep.passo)
+    #print("*** Lenght = " + str(len(UserSteps))+ "*********** " + tempUserStep.telefone + " ********** " + tempUserStep.passo)
     if tempUserStep.passo == '':
-        print("Novo passo = B1")
+        sendMessage(tempUserStep, "Bom dia")
+        sendMessage(tempUserStep, "Mensagem 2")
+        #print("Novo passo = B1")
         tempUserStep.passo = "B1"
     elif tempUserStep.passo == 'B1':
-        print("Novo passo = B2")
+        sendMessage(tempUserStep, "Você mandou mensagem pela segunda vez")
+        #print("Novo passo = B2")
         tempUserStep.passo = "B2"
     else:
-        print('B2 até agora!')
+        sendMessage(tempUserStep, "você \n mandou mensagem, \nagora respondo com quebra de linhas.\n\n\n\nterceira vez a propósito.")
+        #print('B2 até agora!')
     
     for item in UserSteps:
         if item.telefone == tempUserStep.telefone:
             item.passo = tempUserStep.passo
 
-    return tempUserStep.passo
+    
 
 
 @blueprint.route('/webhook', methods=[ 'POST', 'GET' ])
@@ -56,8 +75,8 @@ def webhook():
     #print(res)
     recievedPhoneStr = form['data']['fromNumber']
     tempUserStep = processNumber(str(recievedPhoneStr))
-    feedback = returnMessage(tempUserStep)
+    returnMessage(tempUserStep)
     context = {
-        'title':'webhook | ' + tempUserStep.telefone
+        'title':'webhook | message recieved and processed'
     }
     return context
