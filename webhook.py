@@ -4,9 +4,8 @@ import time
 import json
 
 import flask
-import requests
 from flask import request
-
+import requests as req
 blueprint = flask.Blueprint('webhook', __name__)
 
 class UserStep():
@@ -43,8 +42,8 @@ def sendMessage(userTosendMessage, messageBody):
     'token': "905bd94b9d3a26df733849887c838b9cc5ee1538b72fb1937edf027d5b7b71c71b2c54f1c894e4a2"
     }
 
-    requests.request("POST", url, data=data, headers=headers)
-
+    #requests.request("POST", url, data=data, headers=headers)
+    req.post(url, data = data, headers=headers)
     
 def returnMessage(tempUserStep):
     #print("*** Lenght = " + str(len(UserSteps))+ "*********** " + tempUserStep.telefone + " ********** " + tempUserStep.passo)
