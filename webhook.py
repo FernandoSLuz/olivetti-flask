@@ -73,6 +73,15 @@ def returnMessage(tempUserStep, recievedMessage):
         print(tempUserStep.setor)
         sendMessage(tempUserStep, "Obrigado pelas confirmacoes, "+tempUserStep.nome_funcionario+". \\n Agora, voce poderia me dizer em qual loja trabalha?" + "\\n" + bd.SelectLojas(tempUserStep.setor))
         tempUserStep.passo = "B4"
+    elif tempUserStep.passo == 'B4':
+        if bd.searchByUsername(tempUserStep.nome_funcionario):
+            tempUserStep.loja = bd.SelectLojas_Unique(int(recievedMessage))
+            updateUserStep(tempUserStep)
+            sendMessage(tempUserStep, "Muito bem, "+tempUserStep.nome_funcionario+"! agora que você está cadastrado(a), trarei as novidades do shopping Parque D. Pedro para você! \\nDigite a opção desejada:\\n1- Descontos\\n2- Avisos e Informações\\n3- Receber avisos automáticos\\n4- Desabilitar avisos automáticos")
+            tempUserStep.passo = "A2"
+        else:
+            sendMessage(tempUserStep, "Infelizmente não localizei seu cadastro no Portal, mas já enviei uma solicitação ao seu líder e, assim que o cadastro for completado, você irá receber descontos e novidades aqui pelo Pepe!")
+            tempUserStep.passo = ''
     elif tempUserStep.passo == 'A1':
         sendMessage(tempUserStep, "Olá, "+tempUserStep.nome_funcionario+"! Eu sou o Pepe e irei trazer as novidades do shopping Parque D. Pedro para você! \\nDigite a opção desejada:\\n1- Descontos\\n2- Avisos e Informações\\n3- Receber avisos automáticos\\n4- Desabilitar avisos automáticos")
         tempUserStep.passo = "A2"
