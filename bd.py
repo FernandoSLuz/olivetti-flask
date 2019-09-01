@@ -59,7 +59,7 @@ class RequisicoesDePromocoes(db.Model):
 
 ######################### CRUDE OPERATIONS #############################
 def searchByUsername(usernName):
-    data_user = Funcionarios.query.filter_by(nome_usuario=usernName).all()
+    data_user = Funcionarios.query.filter_by(nome_funcionario=usernName).all()
     if(len(data_user)==0):
         return False
     else:
