@@ -35,7 +35,7 @@ def sendMessage(userTosendMessage, messageBody):
     print("")
     url = "https://api.wassenger.com/v1/messages"
     data = {
-        'phone': userTosendMessage.phone,
+        'phone': userTosendMessage.telefone,
         'message': messageBody
     }
     headers = {
