@@ -7,7 +7,6 @@ import json
 import flask
 from flask import request
 import requests as req
-from bd import db
 
 blueprint = flask.Blueprint('webhook', __name__)
 
