@@ -33,7 +33,7 @@ def processNumber(numberRecieved):
     return tempUserStep
 
 def returnMessage(tempUserStep):
-    print("************** " + tempUserStep.telefone + " ********** " + tempUserStep.passo)
+    print("*** Lenght = " + str(len(UserSteps))+ "*********** " + tempUserStep.telefone + " ********** " + tempUserStep.passo)
     if tempUserStep.passo == '':
         print("Novo passo = B1")
         tempUserStep.passo = "B1"
