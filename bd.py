@@ -66,5 +66,5 @@ def SelectSetores():
     data_setores = Setores.query.all()
     setores = ""
     for num, d in enumerate(data_setores, start=1):
-        setores += "\\n selecione " + str(num) + " para " + str(d)
+        setores += "\\n selecione " + str(num) + " para " + str(d.nome_setor)
     return(setores)
