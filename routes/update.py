@@ -10,7 +10,7 @@ blueprint = flask.Blueprint('update', __name__)
 @blueprint.route('/update', methods=[ 'GET' ])
 def update():
     context = {
-        'title':'Hacka | Update'
+        'title':'Hacka | Pepe'
     }
     return flask.render_template('update.html', context=context)
 
