@@ -65,7 +65,7 @@ def returnMessage(tempUserStep, recievedMessage):
     elif tempUserStep.passo == 'B2':
         tempUserStep.nome_funcionario = recievedMessage
         updateUserStep(tempUserStep)
-        sendMessage(tempUserStep, "Caralho "+tempUserStep.nome_funcionario+"!. \\n Voce poderia me dizer em qual setor trabalha?" + "\\n" + bd.SelectSetores())
+        sendMessage(tempUserStep, "Muito bem, "+tempUserStep.nome_funcionario+". \\n Voce poderia me dizer em qual setor trabalha?" + "\\n" + bd.SelectSetores())
         tempUserStep.passo = "B3"
     elif tempUserStep.passo == 'B3':
         tempUserStep.setor = bd.SelectSetores_Unique(int(recievedMessage))
@@ -85,6 +85,15 @@ def returnMessage(tempUserStep, recievedMessage):
     elif tempUserStep.passo == 'A1':
         sendMessage(tempUserStep, "Olá, "+tempUserStep.nome_funcionario+"! Eu sou o Pepe e irei trazer as novidades do shopping Parque D. Pedro para você! \\nDigite a opção desejada:\\n1- Descontos\\n2- Avisos e Informações\\n3- Receber avisos automáticos\\n4- Desabilitar avisos automáticos")
         tempUserStep.passo = "A2"
+    elif tempUserStep.passo == 'A2':
+        if(recievedMessage == "1"):
+            sendMessage(tempUserStep, "Feed de Notícias")
+        else if(recievedMessage == "2"):
+            sendMessage(tempUserStep, "Feed de Circular")
+        else if(recievedMessage == "3"):
+            sendMessage(tempUserStep, "Habilitar/Desabilitar Promoções")
+        else if(recievedMessage == "4"):
+            sendMessage(tempUserStep, "Habilitar/Desabilitar Circular")
     else:
         sendMessage(tempUserStep, "fim das mensagens.")
         #print('B2 até agora!')
