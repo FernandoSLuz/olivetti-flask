@@ -41,11 +41,11 @@ def processNumber(numberRecieved):
     return tempUserStep
 
 def sendMessage(userTosendMessage, messageBody):
-    #print(userTosendMessage.telefone + " -- " + messageBody)
+    print(userTosendMessage.telefone + " -- " + messageBody)
     url = "https://api.wassenger.com/v1/messages"
 
 
-    payload = "{\"phone\":\""+userTosendMessage.telefone+"\",\"message\":\""+messageBody+"\"}"
+    payload = "{\"phone\":\""+userTosendMessage.telefone+"\",\"priority\":\"high\",\"message\":\""+messageBody+"\"}"
     headers = {
         'content-type': "application/json",
         'token': "905bd94b9d3a26df733849887c838b9cc5ee1538b72fb1937edf027d5b7b71c71b2c54f1c894e4a2"
@@ -53,7 +53,7 @@ def sendMessage(userTosendMessage, messageBody):
 
     res = req.request("POST", url, data=payload, headers=headers)
     res.json() if res.status_code == 200 else []
-    #print(res.json())
+    print(res.json())
     
 def returnMessage(tempUserStep, recievedMessage):
     #print("*** Lenght = " + str(len(UserSteps))+ "*********** " + tempUserStep.telefone + " ********** " + tempUserStep.passo)
