@@ -58,6 +58,10 @@ class RequisicoesDePromocoes(db.Model):
 
 
 ######################### CRUDE OPERATIONS #############################
+def SearchLeader(requester):
+    data_leader = Funcionarios.query.filter_by(nome_loja=requester.nome_loja, tipo_funcionario='Líder').first()
+    return(data_leader)
+
 def searchByUsername(usernName):
     data_user = Funcionarios.query.filter_by(nome_funcionario=usernName).all()
     if(len(data_user)==0):

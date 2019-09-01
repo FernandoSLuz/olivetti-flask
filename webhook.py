@@ -40,6 +40,19 @@ def processNumber(numberRecieved):
     UserSteps.append(tempUserStep)
     return tempUserStep
 
+def sendMessageToLeader(leader, requester):
+    url = "https://api.wassenger.com/v1/messages"
+
+    messageBody = "Olá " + requester.nome_funcionario + "! um funcionário solicitou acesso à plataforma de serviços IntranetMall:\\n\\nNome: " + requester.nome_funcionario + "\\nTelefone: " + requester.telefone 
+    payload = "{\"phone\":\""+leader.telefone+"\",\"priority\":\"urgent\",\"message\":\""+messageBody+"\"}"
+    headers = {
+        'content-type': "application/json",
+        'token': "905bd94b9d3a26df733849887c838b9cc5ee1538b72fb1937edf027d5b7b71c71b2c54f1c894e4a2"
+        }
+
+    res = req.request("POST", url, data=payload, headers=headers)
+    res.json() if res.status_code == 200 else []
+    print(res.json())
 def sendMessage(userTosendMessage, messageBody):
     print(userTosendMessage.telefone + " -- " + messageBody)
     url = "https://api.wassenger.com/v1/messages"
@@ -80,6 +93,8 @@ def returnMessage(tempUserStep, recievedMessage):
             sendMessage(tempUserStep, "Muito bem, "+tempUserStep.nome_funcionario+"! agora que você está cadastrado(a), trarei as novidades do shopping Parque D. Pedro para você! \\nDigite a opção desejada:\\n1- Descontos\\n2- Avisos e Informações\\n3- Receber avisos automáticos\\n4- Desabilitar avisos automáticos")
             tempUserStep.passo = "A2"
         else:
+            leader = bd.SearchLeader(tempUserStep)
+            sendMessageToLeader(leader, tempUserStep)
             sendMessage(tempUserStep, "Infelizmente não localizei seu cadastro no Portal, mas já enviei uma solicitação ao seu líder e, assim que o cadastro for completado, você irá receber descontos e novidades aqui pelo Pepe!")
             tempUserStep.passo = ''
     elif tempUserStep.passo == 'A1':
@@ -89,11 +104,11 @@ def returnMessage(tempUserStep, recievedMessage):
         if(recievedMessage == "1"):
             sendMessage(tempUserStep, "Feed de Noticias: \\n" + bd.SelectRequests())#bd.SelectLojas(tempUserStep.setor)
         elif(recievedMessage == "2"):
-            sendMessage(tempUserStep, "Feed de Circular")
+            sendMessage(tempUserStep, "V2 - Feed de Circular, em breve.")
         elif(recievedMessage == "3"):
-            sendMessage(tempUserStep, "Habilitar/Desabilitar Promoções")
+            sendMessage(tempUserStep, "V2 - Habilitar/Desabilitar Promoções")
         elif(recievedMessage == "4"):
-            sendMessage(tempUserStep, "Habilitar/Desabilitar Circular")
+            sendMessage(tempUserStep, "V2 - Habilitar/Desabilitar Circular")
     else:
         sendMessage(tempUserStep, "fim das mensagens.")
         #print('B2 até agora!')
