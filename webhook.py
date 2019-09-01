@@ -8,7 +8,7 @@ import flask
 from flask import request
 import requests as req
 from flask import Blueprint
-from bd import db as temp_db
+import bd
 
 blueprint = flask.Blueprint('webhook', __name__)
 
@@ -60,7 +60,7 @@ def returnMessage(tempUserStep, recievedMessage):
         #test = db.select(['*']).from(db.Column('setores'))
         
         
-        sendMessage(tempUserStep, "Muito bem, "+recievedMessage+". \\n Voce poderia me dizer em qual loja trabalha?" + "\\n" + temp_db.SelectSetores())
+        sendMessage(tempUserStep, "Muito bem, "+recievedMessage+". \\n Voce poderia me dizer em qual loja trabalha?" + "\\n" + bd.SelectSetores())
         
         
         #print("Novo passo = B2")
