@@ -26,7 +26,7 @@ bd.db = bd.SQLAlchemy(app)
 @app.route('/')
 def index():
     context = {
-        'title':'Hacka | Update'
+        'title':'Hacka | Pepe'
     }
     return flask.render_template('index.html')
     #return context
