@@ -22,13 +22,18 @@ class UserStep():
 UserSteps = [] 
 
 
+def updateUserStep(tempUser):
+    for item in UserSteps:
+        if item.telefone == tempUser.telefone:
+            item = tempUser
+            return
 
 def processNumber(numberRecieved):
     for item in UserSteps:
         if item.telefone == str(numberRecieved):
-            print('number exists! ' + str(numberRecieved))
+            #print('number exists! ' + str(numberRecieved))
             return item
-    print('not found, adding number ' + str(numberRecieved))
+    #print('not found, adding number ' + str(numberRecieved))
     tempUserStep = UserStep()
     tempUserStep.telefone = str(numberRecieved)
     tempUserStep.passo = 'B1'
@@ -36,7 +41,7 @@ def processNumber(numberRecieved):
     return tempUserStep
 
 def sendMessage(userTosendMessage, messageBody):
-    print(userTosendMessage.telefone + " -- " + messageBody)
+    #print(userTosendMessage.telefone + " -- " + messageBody)
     url = "https://api.wassenger.com/v1/messages"
 
 
@@ -48,7 +53,7 @@ def sendMessage(userTosendMessage, messageBody):
 
     res = req.request("POST", url, data=payload, headers=headers)
     res.json() if res.status_code == 200 else []
-    print(res.json())
+    #print(res.json())
     
 def returnMessage(tempUserStep, recievedMessage):
     #print("*** Lenght = " + str(len(UserSteps))+ "*********** " + tempUserStep.telefone + " ********** " + tempUserStep.passo)
@@ -56,16 +61,19 @@ def returnMessage(tempUserStep, recievedMessage):
         sendMessage(tempUserStep, "Ola! Informe seu nome completo, por favor:")
         #print("Novo passo = B1")
         tempUserStep.passo = "B2"
-        print(bd.SelectSetores_Unique(2))
     elif tempUserStep.passo == 'B2':
-        #test = db.select(['*']).from(db.Column('setores'))
-
-        sendMessage(tempUserStep, "Muito bem, "+recievedMessage+". \\n Voce poderia me dizer em qual loja trabalha?" + "\\n" + bd.SelectSetores())
-
-        #print("Novo passo = B2")
-        tempUserStep.passo = "B2"
+        tempUserStep.nome_funcionario = recievedMessage
+        updateUserStep(tempUserStep)
+        sendMessage(tempUserStep, "Muito bem, "+tempUserStep.nome_funcionario+". \\n Voce poderia me dizer em qual setor trabalha?" + "\\n" + bd.SelectSetores())
+        tempUserStep.passo = "B3"
+    elif tempUserStep.passo == 'B3':
+        tempUserStep.setor = bd.SelectSetores_Unique(int(recievedMessage))
+        updateUserStep(tempUserStep)
+        print(tempUserStep.setor)
+        sendMessage(tempUserStep, "Obrigado pelas confirmacoes, "+tempUserStep.nome_funcionario+". \\n Agora, voce poderia me dizer em qual loja trabalha?" + "\\n" + bd.SelectSetores())
+        tempUserStep.passo = "B4"
     else:
-        sendMessage(tempUserStep, "você \n mandou mensagem, \nagora respondo com quebra de linhas.\n\n\n\nterceira vez a propósito.")
+        sendMessage(tempUserStep, "fim das mensagens.")
         #print('B2 até agora!')
     
     for item in UserSteps:
