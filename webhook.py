@@ -9,6 +9,7 @@ import requests as req
 blueprint = flask.Blueprint('webhook', __name__)
 
 class UserStep():
+    nome_funcionario = ""
     telefone = ""
     setor = ""
     loja = ""
@@ -26,7 +27,7 @@ def processNumber(numberRecieved):
     print('not found, adding number ' + str(numberRecieved))
     tempUserStep = UserStep()
     tempUserStep.telefone = str(numberRecieved)
-    tempUserStep.passo = ""
+    tempUserStep.passo = 'B1'
     UserSteps.append(tempUserStep)
     return tempUserStep
 
@@ -42,30 +43,17 @@ def sendMessage(userTosendMessage, messageBody):
         }
 
     res = req.request("POST", url, data=payload, headers=headers)
-
-    #data = {
-    #    'phone': userTosendMessage.telefone,
-    #    'message': messageBody
-    #}
-    #headers = {
-    #'content-type': "application/json",
-    #'token': "905bd94b9d3a26df733849887c838b9cc5ee1538b72fb1937edf027d5b7b71c71b2c54f1c894e4a2"
-    #}
-
-    #requests.request("POST", url, data=data, headers=headers)
-    #res = req.post(url, data = data, headers=headers)
     res.json() if res.status_code == 200 else []
-    print(res.json())
+    #print(res.json())
     
-def returnMessage(tempUserStep):
+def returnMessage(tempUserStep, recievedMessage):
     #print("*** Lenght = " + str(len(UserSteps))+ "*********** " + tempUserStep.telefone + " ********** " + tempUserStep.passo)
-    if tempUserStep.passo == '':
-        sendMessage(tempUserStep, "Bom dia")
-        sendMessage(tempUserStep, "Mensagem 2")
+    if tempUserStep.passo == 'B1':
+        sendMessage(tempUserStep, "Olá! Informe seu nome completo, por favor:")
         #print("Novo passo = B1")
-        tempUserStep.passo = "B1"
-    elif tempUserStep.passo == 'B1':
-        sendMessage(tempUserStep, "Você mandou mensagem pela segunda vez")
+        tempUserStep.passo = "B2"
+    elif tempUserStep.passo == 'B2':
+        sendMessage(tempUserStep, "Muito bem, "+recievedMessage+".\nVocê poderia me dizer em qual loja trabalha?")
         #print("Novo passo = B2")
         tempUserStep.passo = "B2"
     else:
@@ -84,9 +72,10 @@ def webhook():
     form = request.get_json(silent=True, force=True)
     #res = (json.dumps(form, indent=3))
     #print(res)
-    recievedPhoneStr = form['data']['fromNumber']
-    tempUserStep = processNumber(str(recievedPhoneStr))
-    returnMessage(tempUserStep)
+    recievedPhoneStr = str(form['data']['fromNumber'])
+    recievedMessage = str(form['data']['body'])
+    tempUserStep = processNumber(recievedPhoneStr)
+    returnMessage(tempUserStep, recievedMessage)
     context = {
         'title':'webhook | message recieved and processed'
     }
