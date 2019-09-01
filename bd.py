@@ -63,9 +63,10 @@ def SearchLeader(requester):
     leaderFound = Funcionarios.query.filter_by(nome_loja=requester.loja, tipo_funcionario='Líder').all()
     if(len(leaderFound)==0):
         print("Not Found")
+        return(['',''])
     else:
         leader = [leaderFound.telefone, leaderFound.nome_funcionario]
-    return(leader)
+        return(leader)
 
 def searchByUsername(usernName):
     data_user = Funcionarios.query.filter_by(nome_funcionario=usernName).all()
