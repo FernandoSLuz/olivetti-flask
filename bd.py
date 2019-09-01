@@ -74,6 +74,7 @@ def SelectSetores_Unique(indexToCheck):
     return(str(setores))
 
 def SelectLojas(sectorToCheck):
+    print(sectorToCheck)
     data_lojas = Lojas.query.filter_by(nome_setor=sectorToCheck).all()
     lojas = ""
     for num, d in enumerate(data_lojas, start=1):
