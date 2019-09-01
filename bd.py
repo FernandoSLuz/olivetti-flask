@@ -60,3 +60,8 @@ class RequisicoesDePromocoes(db.Model):
         self.status = status
         self.corpo = corpo
 
+def insertFuncionario():
+    data = Funcionarios(input('Digite o nome do funcionario: '), input('Digite o nome da loja: '), input('Digite o cargo: '), 
+    input('Digite o CPF do funcionario: '), 'Ativo', input('Digite o telefone do funcionario: '))
+    db.session.add(data)
+    db.session.commit()
