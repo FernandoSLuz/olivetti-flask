@@ -1,10 +1,6 @@
-from app import app
 from flask_sqlalchemy import SQLAlchemy
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''CuN@s0no0666@localhost/hackaengage'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 class Setores(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -4,10 +4,11 @@ import os
 import time
 import json
 
-import bd
 import flask
 from flask import request
 import requests as req
+from flask import Blueprint
+from bd import db as temp_db
 
 blueprint = flask.Blueprint('webhook', __name__)
 
@@ -57,7 +58,11 @@ def returnMessage(tempUserStep, recievedMessage):
         tempUserStep.passo = "B2"
     elif tempUserStep.passo == 'B2':
         #test = db.select(['*']).from(db.Column('setores'))
-        sendMessage(tempUserStep, "Muito bem, "+recievedMessage+". \\n Voce poderia me dizer em qual loja trabalha?" + "\\n" + bd.SelectSetores())
+        
+        
+        sendMessage(tempUserStep, "Muito bem, "+recievedMessage+". \\n Voce poderia me dizer em qual loja trabalha?" + "\\n" + temp_db.SelectSetores())
+        
+        
         #print("Novo passo = B2")
         tempUserStep.passo = "B2"
     else:
