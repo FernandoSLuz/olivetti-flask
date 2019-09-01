@@ -36,7 +36,7 @@ def processNumber(numberRecieved):
     #print('not found, adding number ' + str(numberRecieved))
     tempUserStep = UserStep()
     tempUserStep.telefone = str(numberRecieved)
-    tempUserStep.passo = 'B1'
+    tempUserStep.passo = ''
     UserSteps.append(tempUserStep)
     return tempUserStep
 
@@ -56,6 +56,8 @@ def sendMessage(userTosendMessage, messageBody):
     print(res.json())
     
 def returnMessage(tempUserStep, recievedMessage):
+    if(tempUserStep.passo == ''):
+        bd.checkIfUserExists(tempUserStep.telefone)
     #print("*** Lenght = " + str(len(UserSteps))+ "*********** " + tempUserStep.telefone + " ********** " + tempUserStep.passo)
     if tempUserStep.passo == 'B1':
         sendMessage(tempUserStep, "Ola! Informe seu nome completo, por favor:")

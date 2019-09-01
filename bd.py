@@ -56,6 +56,12 @@ class RequisicoesDePromocoes(db.Model):
         self.status = status
         self.corpo = corpo
 
+
+######################### CRUDE OPERATIONS #############################
+def checkIfUserExists(tempPhoneNumber):
+    data_user = Funcionarios.query.filter_by(telefone=tempPhoneNumber).first()
+    print(data_user.nome_funcionario + " ---------------- ")
+
 def insertFuncionario():
     data = Funcionarios(input('Digite o nome do funcionario: '), input('Digite o nome da loja: '), input('Digite o cargo: '), 
     input('Digite o CPF do funcionario: '), 'Ativo', input('Digite o telefone do funcionario: '))
