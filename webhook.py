@@ -70,7 +70,7 @@ def returnMessage(tempUserStep, recievedMessage):
         tempUserStep.setor = bd.SelectSetores_Unique(int(recievedMessage))
         updateUserStep(tempUserStep)
         print(tempUserStep.setor)
-        sendMessage(tempUserStep, "Obrigado pelas confirmacoes, "+tempUserStep.nome_funcionario+". \\n Agora, voce poderia me dizer em qual loja trabalha?" + "\\n" + bd.SelectSetores())
+        sendMessage(tempUserStep, "Obrigado pelas confirmacoes, "+tempUserStep.nome_funcionario+". \\n Agora, voce poderia me dizer em qual loja trabalha?" + "\\n" + bd.SelectLojas(tempUserStep.setor))
         tempUserStep.passo = "B4"
     else:
         sendMessage(tempUserStep, "fim das mensagens.")
