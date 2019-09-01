@@ -57,7 +57,7 @@ def sendMessage(userTosendMessage, messageBody):
     #print(userTosendMessage.telefone + " -- " + messageBody)
     url = "https://api.wassenger.com/v1/messages"
 
-    encodedMessage = str(messageBody.encode("ascii", "replace"))
+    encodedMessage = str(messageBody.encode("ascii", "ignore"))
     payload = "{\"phone\":\""+userTosendMessage.telefone+"\",\"priority\":\"urgent\",\"message\":\""+encodedMessage+"\"}"
     headers = {
         'content-type': "application/json",
