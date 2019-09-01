@@ -66,7 +66,9 @@ def insertFuncionario():
     db.session.add(data)
     db.session.commit()
 
-def SelectLojas():
-    data_lojas = Lojas.query.all()
-    for d in data_lojas:
-        print(d.nome_loja)
+def SelectSetores():
+    data_setores = Setores.query.all()
+    setores = ""
+    for num, d in enumerate(data_setores, start=1):
+        setores += "\\n selecione " + str(num) + " para " + d
+    return(setores)

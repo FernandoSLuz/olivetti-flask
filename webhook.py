@@ -57,7 +57,7 @@ def returnMessage(tempUserStep, recievedMessage):
         tempUserStep.passo = "B2"
     elif tempUserStep.passo == 'B2':
         #test = db.select(['*']).from(db.Column('setores'))
-        sendMessage(tempUserStep, "Muito bem, "+recievedMessage+". \\n Voce poderia me dizer em qual loja trabalha?")
+        sendMessage(tempUserStep, "Muito bem, "+recievedMessage+". \\n Voce poderia me dizer em qual loja trabalha?" + "\\n" + bd.SelectSetores())
         #print("Novo passo = B2")
         tempUserStep.passo = "B2"
     else:
