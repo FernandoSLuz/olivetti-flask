@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sys
 import os
 import time
@@ -36,7 +37,7 @@ def sendMessage(userTosendMessage, messageBody):
     url = "https://api.wassenger.com/v1/messages"
 
 
-    payload = "{\"phone\":\""+userTosendMessage.telefone+"\",\"message\":\""+messageBody.encode('utf-8')+"\"}"
+    payload = "{\"phone\":\""+userTosendMessage.telefone+"\",\"message\":\""+messageBody+"\"}"
     headers = {
         'content-type': "application/json",
         'token': "905bd94b9d3a26df733849887c838b9cc5ee1538b72fb1937edf027d5b7b71c71b2c54f1c894e4a2"
@@ -49,11 +50,11 @@ def sendMessage(userTosendMessage, messageBody):
 def returnMessage(tempUserStep, recievedMessage):
     #print("*** Lenght = " + str(len(UserSteps))+ "*********** " + tempUserStep.telefone + " ********** " + tempUserStep.passo)
     if tempUserStep.passo == 'B1':
-        sendMessage(tempUserStep, "Olá! Informe seu nome completo, por favor:")
+        sendMessage(tempUserStep, "Ola! Informe seu nome completo, por favor:")
         #print("Novo passo = B1")
         tempUserStep.passo = "B2"
     elif tempUserStep.passo == 'B2':
-        sendMessage(tempUserStep, "Muito bem, "+recievedMessage+".\nVocê poderia me dizer em qual loja trabalha?")
+        sendMessage(tempUserStep, "Muito bem, "+recievedMessage+".\nVoce poderia me dizer em qual loja trabalha?")
         #print("Novo passo = B2")
         tempUserStep.passo = "B2"
     else:
