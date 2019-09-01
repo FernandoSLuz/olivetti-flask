@@ -3,11 +3,14 @@
 {% block content %}
 <div class="card shadow">
   <div class="card-header">
-    <h1 align="center">Jenkins</h1>
+    <h1 align="center">Atualização de Base de dados</h1>
   </div>
-  <div class="card-body">
-    
+  <div class="card-body" align="center"> Por favor, selecione a planilha com os novos cadastros para atualizar a base.<br><br>
+    <form method="POST" action="submitupdate"> 
+      <input type="file" name="fileupload" value="fileupload" id="fileupload" accept=".xlsx">
+      <label for="fileupload">Carregar planilha</label> 
+      <input type="submit" value="Carregar">
+    </form>
   </div>
 </div> 
 {% endblock %}
-
