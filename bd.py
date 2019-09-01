@@ -108,7 +108,7 @@ def SelectSetores():
         setores += "\\n selecione " + str(num) + " para " + str(d.nome_setor)
     return(setores)
 def SelectSetores_Unique(indexToCheck):
-    data_setor = Setores.query.filter_by(id=indexToCheck).first()
+    data_setor = Lojas.query.filter_by(id=indexToCheck).first()
     setores = data_setor.nome_setor
     return(str(setores))
 
