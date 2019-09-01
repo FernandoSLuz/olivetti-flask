@@ -68,7 +68,7 @@ def checkIfUserExists(tempUser):
         tempUser.passo = "A1"
         tempUser.telefone = data_user[0].telefone
         tempUser.nome_funcionario = data_user[0].nome_funcionario
-        tempUser.loja = data_user[0].loja
+        tempUser.loja = data_user[0].nome_loja
         print("número existe no banco, realizando perguntas")
         return tempUser
 
