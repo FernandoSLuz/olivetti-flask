@@ -58,6 +58,13 @@ class RequisicoesDePromocoes(db.Model):
 
 
 ######################### CRUDE OPERATIONS #############################
+def searchByUsername(usernName):
+    data_user = Funcionarios.query.filter_by(nome_usuario=usernName).all()
+    if(len(data_user)==0):
+        return False
+    else:
+        return True
+
 def checkIfUserExists(tempUser):
     data_user = Funcionarios.query.filter_by(telefone=tempUser.telefone).all()
     if(len(data_user)==0):
@@ -94,7 +101,7 @@ def SelectLojas(sectorToCheck):
     data_lojas = Lojas.query.filter_by(nome_setor=sectorToCheck).all()
     lojas = ""
     for num, d in enumerate(data_lojas, start=1):
-        lojas += "\\n selecione " + str(num) + " para " + str(d.nome_loja)
+        lojas += "\\n selecione " + str(d.id) + " para " + str(d.nome_loja)
     return(lojas)
 def SelectLojas_Unique(indexToCheck):
     data_setor = Setores.query.filter_by(id=indexToCheck).first()

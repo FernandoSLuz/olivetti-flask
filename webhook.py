@@ -58,7 +58,6 @@ def sendMessage(userTosendMessage, messageBody):
 def returnMessage(tempUserStep, recievedMessage):
     if(tempUserStep.passo == ''):
         bd.checkIfUserExists(tempUserStep)
-    #print("*** Lenght = " + str(len(UserSteps))+ "*********** " + tempUserStep.telefone + " ********** " + tempUserStep.passo)
     if tempUserStep.passo == 'B1':
         sendMessage(tempUserStep, "Ola! Informe seu nome completo, por favor:")
         #print("Novo passo = B1")
@@ -74,6 +73,9 @@ def returnMessage(tempUserStep, recievedMessage):
         print(tempUserStep.setor)
         sendMessage(tempUserStep, "Obrigado pelas confirmacoes, "+tempUserStep.nome_funcionario+". \\n Agora, voce poderia me dizer em qual loja trabalha?" + "\\n" + bd.SelectLojas(tempUserStep.setor))
         tempUserStep.passo = "B4"
+    elif tempUserStep.passo == 'A1':
+        sendMessage(tempUserStep, "Olá, "Nome"! Eu sou o Pepe e irei trazer as novidades do shopping Parque D. Pedro para você! \\nDigite a opção desejada:\\n1- Descontos\\n2- Avisos e Informações\\n3- Receber avisos automáticos\\n4- Desabilitar avisos automáticos")
+        tempUserStep.passo = "A2"
     else:
         sendMessage(tempUserStep, "fim das mensagens.")
         #print('B2 até agora!')
