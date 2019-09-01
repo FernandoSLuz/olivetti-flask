@@ -43,7 +43,7 @@ def sendMessageToLeader(leader, requester):
     url = "https://api.wassenger.com/v1/messages"
 
     messageBody = "Olá " + str(leader[1]) + "! um funcionário solicitou acesso à plataforma de serviços IntranetMall:\\n\\nNome: " + requester.nome_funcionario + "\\nTelefone: " + requester.telefone 
-    messageBody = unicode(messageBody,'utf-8')
+    
     payload = "{\"phone\":\""+str(leader[0])+"\",\"priority\":\"urgent\",\"message\":\""+messageBody+"\"}"
     headers = {
         'content-type': "application/json",
@@ -57,8 +57,8 @@ def sendMessage(userTosendMessage, messageBody):
     #print(userTosendMessage.telefone + " -- " + messageBody)
     url = "https://api.wassenger.com/v1/messages"
 
-
-    payload = "{\"phone\":\""+userTosendMessage.telefone+"\",\"priority\":\"urgent\",\"message\":\""+unicode(messageBody,'utf-8')+"\"}"
+    encodedMessage = str(messageBody.encode('utf-8'))
+    payload = "{\"phone\":\""+userTosendMessage.telefone+"\",\"priority\":\"urgent\",\"message\":\""+encodedMessage+"\"}"
     headers = {
         'content-type': "application/json",
         'token': "905bd94b9d3a26df733849887c838b9cc5ee1538b72fb1937edf027d5b7b71c71b2c54f1c894e4a2"
