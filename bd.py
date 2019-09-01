@@ -60,7 +60,7 @@ class RequisicoesDePromocoes(db.Model):
 ######################### CRUDE OPERATIONS #############################
 def checkIfUserExists(tempPhoneNumber):
     data_user = Funcionarios.query.filter_by(telefone=tempPhoneNumber).all()
-    print("result len", len(data_user.all()))
+    print("result len", len(data_user))
     print(data_user.nome_funcionario + " ---------------- ")
 
 def insertFuncionario():
