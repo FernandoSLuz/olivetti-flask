@@ -17,7 +17,7 @@ def update():
 @blueprint.route('/submitupdate', methods=[ 'POST' ])
 def submitupdate():
     context = {
-        'title':'Hacka | SubmitUpdate'
+        'title':'Hacka | Update'
     }
 
     return flask.render_template('update.html', context=context)
