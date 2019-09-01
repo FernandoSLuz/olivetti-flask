@@ -1,7 +1,7 @@
 from app import app
 from flask_sqlalchemy import SQLAlchemy
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''@localhost/hackaengage'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''CuN@s0no0666@localhost/hackaengage'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -65,3 +65,8 @@ def insertFuncionario():
     input('Digite o CPF do funcionario: '), 'Ativo', input('Digite o telefone do funcionario: '))
     db.session.add(data)
     db.session.commit()
+
+def SelectLojas():
+    data_lojas = Lojas.query.all()
+    for d in data_lojas:
+        print(d.nome_loja)
