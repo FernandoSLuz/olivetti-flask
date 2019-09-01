@@ -88,11 +88,11 @@ def returnMessage(tempUserStep, recievedMessage):
     elif tempUserStep.passo == 'A2':
         if(recievedMessage == "1"):
             sendMessage(tempUserStep, "Feed de Notícias")
-        else if(recievedMessage == "2"):
+        elif(recievedMessage == "2"):
             sendMessage(tempUserStep, "Feed de Circular")
-        else if(recievedMessage == "3"):
+        elif(recievedMessage == "3"):
             sendMessage(tempUserStep, "Habilitar/Desabilitar Promoções")
-        else if(recievedMessage == "4"):
+        elif(recievedMessage == "4"):
             sendMessage(tempUserStep, "Habilitar/Desabilitar Circular")
     else:
         sendMessage(tempUserStep, "fim das mensagens.")
