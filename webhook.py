@@ -24,9 +24,8 @@ def processNumber(numberRecieved):
         if item.telefone == str(numberRecieved):
             print('number exists! ' + str(numberRecieved))
             return item
-            
     print('not found, adding number ' + str(numberRecieved))
-    tempUserStep = UserStep
+    tempUserStep = UserStep()
     tempUserStep.telefone = str(numberRecieved)
     tempUserStep.passo = ""
     UserSteps.append(tempUserStep)
