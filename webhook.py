@@ -108,8 +108,8 @@ def returnMessage(tempUserStep, recievedMessage):
 @blueprint.route('/webhook', methods=[ 'POST', 'GET' ])
 def webhook():
     form = request.get_json(silent=True, force=True)
-    #res = (json.dumps(form, indent=3))
-    #print(res)
+    res = (json.dumps(form, indent=3))
+    print(res)
     recievedPhoneStr = str(form['data']['fromNumber'])
     recievedMessage = str(form['data']['body'])
     tempUserStep = processNumber(recievedPhoneStr)
