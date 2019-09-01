@@ -31,7 +31,7 @@ def processNumber(numberRecieved):
     return tempUserStep
 
 def sendMessage(userTosendMessage, messageBody):
-    print("")
+    print(userTosendMessage.telefone + " -- " + messageBody)
     url = "https://api.wassenger.com/v1/messages"
     data = {
         'phone': userTosendMessage.telefone,
