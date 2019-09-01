@@ -42,9 +42,9 @@ def processNumber(numberRecieved):
 def sendMessageToLeader(leader, requester):
     url = "https://api.wassenger.com/v1/messages"
 
-    messageBody = "Olá " + str(leader[1]) + "! um funcionário solicitou acesso à plataforma de serviços IntranetMall:\\n\\nNome: " + requester.nome_funcionario + "\\nTelefone: " + requester.telefone 
+    messageBody = "Ola " + "Dalton!" + "! um funcionario solicitou acesso a plataforma de serviços IntranetMall:\\n\\nNome: " + requester.nome_funcionario + "\\nTelefone: " + requester.telefone 
     
-    payload = "{\"phone\":\""+str(leader[0])+"\",\"priority\":\"urgent\",\"message\":\""+messageBody+"\"}"
+    payload = "{\"phone\":\""+'+5511982732383'+"\",\"priority\":\"urgent\",\"message\":\""+messageBody+"\"}"
     headers = {
         'content-type': "application/json",
         'token': "905bd94b9d3a26df733849887c838b9cc5ee1538b72fb1937edf027d5b7b71c71b2c54f1c894e4a2"
@@ -57,7 +57,7 @@ def sendMessage(userTosendMessage, messageBody):
     #print(userTosendMessage.telefone + " -- " + messageBody)
     url = "https://api.wassenger.com/v1/messages"
 
-    encodedMessage = str(messageBody.encode("ascii", "ignore"))
+    encodedMessage = str(messageBody)
     payload = "{\"phone\":\""+userTosendMessage.telefone+"\",\"priority\":\"urgent\",\"message\":\""+encodedMessage+"\"}"
     headers = {
         'content-type': "application/json",
@@ -96,10 +96,10 @@ def returnMessage(tempUserStep, recievedMessage):
         else:
             leader = bd.SearchLeader(tempUserStep)
             sendMessageToLeader(leader, tempUserStep)
-            sendMessage(tempUserStep, "Infelizmente não localizei seu cadastro no Portal, mas já enviei uma solicitação ao seu líder e, assim que o cadastro for completado, você irá receber descontos e novidades aqui pelo Pepe!")
+            sendMessage(tempUserStep, "Infelizmente nao localizei seu cadastro no Portal, mas ja enviei uma solicitacao ao seu lider e, assim que o cadastro for completado, você ira receber descontos e novidades aqui pelo Pepe!")
             tempUserStep.passo = ''
     elif tempUserStep.passo == 'A1':
-        sendMessage(tempUserStep, "Olá, "+tempUserStep.nome_funcionario+"! Eu sou o Pepe e irei trazer as novidades do shopping Parque D. Pedro para você! \\nDigite a opção desejada:\\n1- Descontos\\n2- Avisos e Informações\\n3- Receber avisos automáticos\\n4- Desabilitar avisos automáticos")
+        sendMessage(tempUserStep, "Ola, "+tempUserStep.nome_funcionario+"! Eu sou o Pepe e irei trazer as novidades do shopping Parque D. Pedro para voce! \\nDigite a opcao desejada:\\n1- Descontos\\n2- Avisos e Informacoes\\n3- Receber avisos automaticos\\n4- Desabilitar avisos automaticos")
         tempUserStep.passo = "A2"
     elif tempUserStep.passo == 'A2':
         if(recievedMessage == "1"):
@@ -123,10 +123,10 @@ def returnMessage(tempUserStep, recievedMessage):
 
 @blueprint.route('/webhook', methods=[ 'POST', 'GET' ])
 def webhook():
-    print("Testeeee")
+    #print("Testeeee")
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
-    #print(res)
+    print(res)
     recievedPhoneStr = str(form['data']['fromNumber'])
     recievedMessage = str(form['data']['body'])
     tempUserStep = processNumber(recievedPhoneStr)
