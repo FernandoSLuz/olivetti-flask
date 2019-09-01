@@ -28,7 +28,7 @@ def processNumber(numberRecieved):
     print('not found, adding number ' + str(numberRecieved))
     tempUserStep = UserStep
     tempUserStep.telefone = str(numberRecieved)
-    #tempUserStep.passo = ""
+    tempUserStep.passo = ""
     UserSteps.append(tempUserStep)
     return tempUserStep
 
