@@ -7,6 +7,8 @@ import json
 import flask
 from flask import request
 import requests as req
+from bd import db
+
 blueprint = flask.Blueprint('webhook', __name__)
 
 class UserStep():
@@ -54,6 +56,7 @@ def returnMessage(tempUserStep, recievedMessage):
         #print("Novo passo = B1")
         tempUserStep.passo = "B2"
     elif tempUserStep.passo == 'B2':
+        #test = db.select(['*']).from(db.Column('setores'))
         sendMessage(tempUserStep, "Muito bem, "+recievedMessage+". \\n Voce poderia me dizer em qual loja trabalha?")
         #print("Novo passo = B2")
         tempUserStep.passo = "B2"
