@@ -52,8 +52,11 @@ class RequisicoesDePromocoes(db.Model):
     data_requisicao = db.Column(db.String(80))
     nome_loja = db.Column(db.String(80))
     status = db.Column(db.String(80))
-    def __init__(self, nome_funcionario, data_requisicao, status, nome_loja):
+    corpo = db.Column(db.String(80))
+    def __init__(self, nome_funcionario, data_requisicao, nome_loja, status, corpo):
         self.nome_funcionario = nome_funcionario
         self.data_requisicao = data_requisicao
         self.nome_loja = nome_loja
+        self.status = status
+        self.corpo = corpo
 
