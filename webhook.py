@@ -43,7 +43,9 @@ def sendMessage(userTosendMessage, messageBody):
     }
 
     #requests.request("POST", url, data=data, headers=headers)
-    req.post(url, data = data, headers=headers)
+    res = req.post(url, data = data, headers=headers)
+    res.json() if res.status_code == 200 else []
+    print(res.json())
     
 def returnMessage(tempUserStep):
     #print("*** Lenght = " + str(len(UserSteps))+ "*********** " + tempUserStep.telefone + " ********** " + tempUserStep.passo)
