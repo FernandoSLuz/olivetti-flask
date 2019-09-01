@@ -7,6 +7,7 @@ import requests
 
 from routes.registers import blueprint as registers_blueprint
 from routes.update import blueprint as update_blueprint
+from webhook import blueprint as webhook_blueprint
 
 
 app = flask.Flask(__name__)
@@ -14,6 +15,7 @@ app = flask.Flask(__name__)
 app.secret_key = 'secret'
 
 app.register_blueprint(registers_blueprint)
+app.register_blueprint(webhook_blueprint)
 app.register_blueprint(update_blueprint)
 
 @app.route('/')
