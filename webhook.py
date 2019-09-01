@@ -54,7 +54,7 @@ def returnMessage(tempUserStep, recievedMessage):
         #print("Novo passo = B1")
         tempUserStep.passo = "B2"
     elif tempUserStep.passo == 'B2':
-        sendMessage(tempUserStep, "Muito bem, "+recievedMessage+".\nVoce poderia me dizer em qual loja trabalha?")
+        sendMessage(tempUserStep, "Muito bem, "+recievedMessage+"./nVoce poderia me dizer em qual loja trabalha?")
         #print("Novo passo = B2")
         tempUserStep.passo = "B2"
     else:
