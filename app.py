@@ -18,7 +18,7 @@ app.register_blueprint(registers_blueprint)
 app.register_blueprint(webhook_blueprint)
 app.register_blueprint(update_blueprint)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''CuN@s0no0666''@localhost/hackaengage'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''@localhost/hackaengage'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 bd.db = bd.SQLAlchemy(app)
