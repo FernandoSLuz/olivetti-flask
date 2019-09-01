@@ -87,7 +87,7 @@ def returnMessage(tempUserStep, recievedMessage):
         tempUserStep.passo = "A2"
     elif tempUserStep.passo == 'A2':
         if(recievedMessage == "1"):
-            sendMessage(tempUserStep, "Feed de Notícias")
+            sendMessage(tempUserStep, "Feed de Noticias: \\n" + bd.SelectRequests())#bd.SelectLojas(tempUserStep.setor)
         elif(recievedMessage == "2"):
             sendMessage(tempUserStep, "Feed de Circular")
         elif(recievedMessage == "3"):

@@ -85,6 +85,13 @@ def insertFuncionario():
     db.session.add(data)
     db.session.commit()
 
+def SelectRequests():
+    requisicoes = RequisicoesDePromocoes.query.all()
+    setores = ""
+    for num, r in enumerate(requisicoes, start=1):
+        setores += "\\n" + str(num) + " - " + str(r.nome_loja) + "\\n" + str(r.corpo) + "\\n"
+    return(setores)
+
 def SelectSetores():
     data_setores = Setores.query.all()
     setores = ""
