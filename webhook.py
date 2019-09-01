@@ -123,6 +123,7 @@ def returnMessage(tempUserStep, recievedMessage):
 
 @blueprint.route('/webhook', methods=[ 'POST', 'GET' ])
 def webhook():
+    print("Testeeee")
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
     #print(res)
