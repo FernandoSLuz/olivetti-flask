@@ -54,11 +54,4 @@ def recievemessage():
             print("---------------> message is not from user. Type = " + str(form['data']['chat']['contact']['type']))
     else:
         print('key dos not exist.')
-    #recievedMessage = str(form['data']['body'])
-    #phones = bd.SelectAllPhones()
-    #context = {
-    #    'wassengerPhone': recievedPhoneStr,
-    #    'wassengerMessage': recievedMessage
-    #}
-    #return context
     return "200"
