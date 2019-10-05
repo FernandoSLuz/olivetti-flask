@@ -42,8 +42,15 @@ def sendmessage():
 def recievemessage():
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
-    print(res)
-    #recievedPhoneStr = str(form['data']['fromNumber'])
+
+    recievedPhoneStr = str(form['data']['fromNumber'])
+    if(form['data']['chat']['contact']['type']):
+        if(str(form['data']['chat']['contact']['type']) == 'user'):
+            print(res)
+        else:
+            print("---------------> message is not from user. Type = " + str(form['data']['chat']['contact']['type']))
+    else:
+        print('key dos not exist.')
     #recievedMessage = str(form['data']['body'])
     #phones = bd.SelectAllPhones()
     #context = {
