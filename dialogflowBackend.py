@@ -27,7 +27,7 @@ def checkNumberStatus():
 def testintents():
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
-    print("hello")
+    return("hello")
     #detect_intent_texts("chatbot-olivetti", str(form['sessionId']), str(form['message']), str(form['languageCode']))
 
 
