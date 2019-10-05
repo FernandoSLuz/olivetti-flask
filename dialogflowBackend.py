@@ -43,7 +43,7 @@ def sendGreetings(project_id, session_id, text, language_code):
     session = session_client.session_path(project_id, session_id)
 
     parameters = struct_pb2.Struct()
-    parameters["given-name"] = 'Fernando'
+    parameters["given-meme"] = 'Fernando'
     parameters["last-name"] = 'Luz'
     
     query_input = {
