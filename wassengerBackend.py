@@ -43,11 +43,11 @@ def recievemessage():
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
     print(res)
-    recievedPhoneStr = str(form['data']['fromNumber'])
-    recievedMessage = str(form['data']['body'])
+    #recievedPhoneStr = str(form['data']['fromNumber'])
+    #recievedMessage = str(form['data']['body'])
     #phones = bd.SelectAllPhones()
-    context = {
-        'wassengerPhone': recievedPhoneStr,
-        'wassengerMessage': recievedMessage
-    }
-    return context
+    #context = {
+    #    'wassengerPhone': recievedPhoneStr,
+    #    'wassengerMessage': recievedMessage
+    #}
+    #return context
