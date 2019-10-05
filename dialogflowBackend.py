@@ -35,7 +35,7 @@ def testintents():
     #    "Fulfillment Text" : queryText
     #}
     #return(context)
-    detect_intent_texts("chatbot-olivetti", str(form['sessionId']), str(form['message']), str(form['languageCode']))
+    sendGreetings("chatbot-olivetti", str(form['sessionId']), str(form['message']), str(form['languageCode']))
     return("test")
 
 def sendGreetings(project_id, session_id, text, language_code):
