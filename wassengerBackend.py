@@ -42,7 +42,7 @@ def sendmessage():
 def recievemessage():
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
-    #print(res)
+    print(res)
     recievedPhoneStr = str(form['data']['fromNumber'])
     recievedMessage = str(form['data']['body'])
     #phones = bd.SelectAllPhones()

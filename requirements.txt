@@ -6,3 +6,4 @@ oauth==1.0.1
 PyMySQL==0.9.3
 requests==2.22.0
 gunicorn==19.9.0
+dialogflow==0.6.0
