@@ -2,15 +2,17 @@ import sys
 import os
 import time
 import json
+import dialogflowBackend as dfb
 
 import flask
 from flask import request
 import requests as req
 from flask import Blueprint
 
+
 blueprint = flask.Blueprint('wassengerBackend', __name__)
 
-def sendMessageToWassenger(phoneNumber, message):
+def sendWassengerMessage(phoneNumber, message):
     url = "https://api.wassenger.com/v1/messages"
     payload = "{\"phone\":\""+phoneNumber+"\",\"priority\":\"urgent\",\"message\":\""+message+"\"}"
     headers = {
@@ -29,7 +31,7 @@ def sendmessage():
     #print(res)
     phone = str(form['phone'])
     message = str(form['message'])
-    statusCode = sendMessageToWassenger(phone, message)
+    statusCode = sendWassengerMessage(phone, message)
     context = {
         'phone': phone,
         'message': message,
@@ -38,20 +40,22 @@ def sendmessage():
     return context
 ########################################################################################################################################
 
-@blueprint.route('/recieveFromWassenger', methods=[ 'POST', 'GET' ])
+@blueprint.route('/recieveWassengerMessage', methods=[ 'POST', 'GET' ])
 def recievemessage():
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
     recievedMessage = ""
-    recievedPhoneStr = ""
+    recievedPhone = ""
     if(form['data']['chat']['contact']['type']):
         if(str(form['data']['chat']['contact']['type']) == 'user'):
             print(res)
             recievedMessage = str(form['data']['body'])
-            recievedPhoneStr = str(form['data']['fromNumber'])
-            sendMessageToWassenger(recievedPhoneStr, recievedMessage)
+            recievedPhone = str(form['data']['fromNumber'])
+            #CHANGELATER
+            dfb.newMessage(recievedPhone, recievedMessage)
+            #sendMessageToWassenger(recievedPhoneStr, recievedMessage)
+            return "200"
         else:
-            print("---------------> message is not from user. Type = " + str(form['data']['chat']['contact']['type']))
+            return("---------------> message is not from user. Type = " + str(form['data']['chat']['contact']['type']))
     else:
-        print('key dos not exist.')
-    return "200"
+        return('key dos not exist.')
