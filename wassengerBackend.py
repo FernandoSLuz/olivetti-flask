@@ -42,11 +42,14 @@ def sendmessage():
 def recievemessage():
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
-
-    recievedPhoneStr = str(form['data']['fromNumber'])
+    recievedMessage = ""
+    recievedPhoneStr = ""
     if(form['data']['chat']['contact']['type']):
         if(str(form['data']['chat']['contact']['type']) == 'user'):
             print(res)
+                recievedMessage = str(form['data']['body'])
+                recievedPhoneStr = str(form['data']['fromNumber'])
+                sendMessageToWassenger(recievedPhoneStr, recievedMessage)
         else:
             print("---------------> message is not from user. Type = " + str(form['data']['chat']['contact']['type']))
     else:
