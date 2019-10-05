@@ -47,9 +47,9 @@ def recievemessage():
     if(form['data']['chat']['contact']['type']):
         if(str(form['data']['chat']['contact']['type']) == 'user'):
             print(res)
-                recievedMessage = str(form['data']['body'])
-                recievedPhoneStr = str(form['data']['fromNumber'])
-                sendMessageToWassenger(recievedPhoneStr, recievedMessage)
+            recievedMessage = str(form['data']['body'])
+            recievedPhoneStr = str(form['data']['fromNumber'])
+            sendMessageToWassenger(recievedPhoneStr, recievedMessage)
         else:
             print("---------------> message is not from user. Type = " + str(form['data']['chat']['contact']['type']))
     else:
