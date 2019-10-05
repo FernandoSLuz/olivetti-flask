@@ -27,8 +27,11 @@ def checkNumberStatus():
 def testintents():
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
-    detect_intent_texts("chatbot-olivetti", str(form['sessionId']), str(form['message']), str(form['languageCode']))
-    return("hello")
+    queryText =  detect_intent_texts("chatbot-olivetti", str(form['sessionId']), str(form['message']), str(form['languageCode']))
+    context = {
+        "Fulfillment Text" : queryText
+    }
+    return(context)
 
 
 def detect_intent_texts(project_id, session_id, text, language_code):
@@ -58,3 +61,4 @@ def detect_intent_texts(project_id, session_id, text, language_code):
         response.query_result.intent_detection_confidence))
     print('Fulfillment text: {}\n'.format(
         response.query_result.fulfillment_text))
+    return str(response.query_result.fulfillment_text)
