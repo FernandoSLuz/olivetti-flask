@@ -24,19 +24,27 @@ def checkNumberStatus():
     #if user in a conversation, get it's id
     #send user message to dialogflow
 
+@blueprint.route('/testintents_greetings', methods=[ 'POST'])
+def testintents_greetings():
+    form = request.get_json(silent=True, force=True)
+    res = (json.dumps(form, indent=3))
+    context = sendGreetings("chatbot-olivetti", str(form['sessionId']), str(form['message']), str(form['languageCode']))
+    context = {
+        "Fulfillment Text" : queryText
+    }
+    return(context)
+    
 @blueprint.route('/testintents', methods=[ 'POST'])
 def testintents():
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
     
     
-    #queryText =  detect_intent_texts("chatbot-olivetti", str(form['sessionId']), str(form['message']), str(form['languageCode']))
-    #context = {
-    #    "Fulfillment Text" : queryText
-    #}
-    #return(context)
-    sendGreetings("chatbot-olivetti", str(form['sessionId']), str(form['message']), str(form['languageCode']))
-    return("test")
+    queryText =  detect_intent_texts("chatbot-olivetti", str(form['sessionId']), str(form['message']), str(form['languageCode']))
+    context = {
+        "Fulfillment Text" : queryText
+    }
+    return(context)
 
 def sendGreetings(project_id, session_id, text, language_code):
     session_client = dialogflow.SessionsClient()
@@ -64,7 +72,7 @@ def sendGreetings(project_id, session_id, text, language_code):
         response.query_result.intent_detection_confidence))
     print('Fulfillment text: {}\n'.format(
         response.query_result.fulfillment_text))
-    #return str(response.query_result.fulfillment_text)
+    return str(response.query_result.fulfillment_text)
 
 def detect_intent_texts(project_id, session_id, text, language_code):
     """Returns the result of detect intent with texts as inputs.
