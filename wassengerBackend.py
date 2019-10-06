@@ -41,7 +41,7 @@ def sendmessage():
     return context
 ########################################################################################################################################
 
-@blueprint.route('/recieveWassengerMessage', methods=[ 'POST' ])
+@blueprint.route('/recieveWassengerMessage', methods=[ 'POST', 'GET' ])
 def recievemessage():
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
