@@ -121,7 +121,7 @@ def detect_intent_texts(project_id, session_id, text, language_code, phone):
     return str(response.query_result.fulfillment_text)
 
 def detect_intent_audio(project_id, session_id, language_code):
-    
+    import os as operational
     import requests as reques
 
     print('Beginning file download with requests')
@@ -132,6 +132,7 @@ def detect_intent_audio(project_id, session_id, language_code):
     audioPath = '/home/fernando/Documents/audios/cat3.ogg'
     with open(audioPath, 'wb') as f:
         f.write(r.content)
+    operational.system("ftransc -f flac /home/fernando/Documents/audios/cat3.ogg")
     audioPath = '/home/fernando/Documents/audios/cat3.flac'
     # Retrieve HTTP meta-data
     print(r.status_code)
