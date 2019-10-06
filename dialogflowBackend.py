@@ -15,11 +15,8 @@ blueprint = flask.Blueprint('dialogflowBackend', __name__)
 
 
 
-def sendDialogflowMessage():
-    print("change")
 
 def checkNumberStatus(phoneRecieved, message):
-    print("2")
     import requests as req
     url = "https://lighthouse-vms.appspot.com/users/check_status"
     payload = {
@@ -27,13 +24,11 @@ def checkNumberStatus(phoneRecieved, message):
     }
     res = req.post(url, data=payload)
     form = res.json()
-    print("3")
     try:
         phone = str(form['phone'])
         message = str(form['profile']) + " " + message
         conversationId = str(form['conversationId'])
         dialogCallBackMessage =  detect_intent_texts("chatbot-olivetti", conversationId, message, "en-us", phone)
-        print("4")
         return dialogCallBackMessage
     except:
         print(form)
@@ -125,30 +120,45 @@ def detect_intent_texts(project_id, session_id, text, language_code, phone):
     
     return str(response.query_result.fulfillment_text)
 
-def detect_intent_audio(project_id, session_id, audio_file_path,
-                        language_code):
+def detect_intent_audio(project_id, session_id, language_code):
+    
+    import requests as reques
+
+    print('Beginning file download with requests')
+
+    url = 'https://api.wassenger.com/v1/io/5d9785b6036345001b5a85f8/files/5d98de1478a4b00028de8765/download?token=905bd94b9d3a26df733849887c838b9cc5ee1538b72fb1937edf027d5b7b71c71b2c54f1c894e4a2'
+    r = reques.get(url)
+
+    audioPath = '/home/fernando/Documents/audios/cat3.ogg'
+    with open(audioPath, 'wb') as f:
+        f.write(r.content)
+
+    # Retrieve HTTP meta-data
+    print(r.status_code)
+    print(r.headers['content-type'])
+    print(r.encoding)
     """Returns the result of detect intent with an audio file as input.
 
     Using the same `session_id` between requests allows continuation
     of the conversaion."""
-    import dialogflow_v2 as dialogflow
+    import dialogflow_v2 as dialogflow2
 
     session_client = dialogflow.SessionsClient()
 
     # Note: hard coding audio_encoding and sample_rate_hertz for simplicity.
-    audio_encoding = dialogflow.enums.AudioEncoding.AUDIO_ENCODING_LINEAR_16
+    audio_encoding = dialogflow2.enums.AudioEncoding.AUDIO_ENCODING_LINEAR_16
     sample_rate_hertz = 16000
 
     session = session_client.session_path(project_id, session_id)
     print('Session path: {}\n'.format(session))
 
-    with open(audio_file_path, 'rb') as audio_file:
+    with open(audioPath, 'rb') as audio_file:
         input_audio = audio_file.read()
 
-    audio_config = dialogflow.types.InputAudioConfig(
+    audio_config = dialogflow2.types.InputAudioConfig(
         audio_encoding=audio_encoding, language_code=language_code,
         sample_rate_hertz=sample_rate_hertz)
-    query_input = dialogflow.types.QueryInput(audio_config=audio_config)
+    query_input = dialogflow2.types.QueryInput(audio_config=audio_config)
 
     response = session_client.detect_intent(
         session=session, query_input=query_input,

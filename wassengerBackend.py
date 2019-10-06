@@ -26,21 +26,10 @@ def sendWassengerMessage(phoneNumber, message):
     return res.status_code
     #print(res.json())
 
-@blueprint.route('/sendmessage', methods=[ 'POST'])
+@blueprint.route('/sendmessage', methods=[ 'GET'])
 def sendmessage():
-    from flask import request
-    form = request.get_json(silent=True, force=True)
-    res = (json.dumps(form, indent=3))
-    #print(res)
-    phone = str(form['phone'])
-    message = str(form['message'])
-    statusCode = sendWassengerMessage(phone, message)
-    context = {
-        'phone': phone,
-        'message': message,
-        'status': statusCode
-    }
-    return context
+    dfb.detect_intent_audio("chatbot-olivetti","111111111111", "en-us")
+    return "done"
 ########################################################################################################################################
 
 @blueprint.route('/recieveWassengerMessage', methods=[ 'POST', 'GET' ])
