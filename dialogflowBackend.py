@@ -18,11 +18,11 @@ blueprint = flask.Blueprint('dialogflowBackend', __name__)
 def sendDialogflowMessage():
     print("change")
 
-def checkNumberStatus(phone, message):
+def checkNumberStatus(phoneRecieved, message):
     print("status")
     url = "https://lighthouse-vms.appspot.com/users/check_status"
     payload = {
-        'phone' = phone
+        phone = phoneRecieved
     }
     res = req.request("POST", url, data=payload)
     form = request.get_json(silent=True, force=True)
