@@ -132,7 +132,7 @@ def detect_intent_audio(project_id, session_id, language_code):
     audioPath = '/home/fernando/Documents/audios/cat3.ogg'
     with open(audioPath, 'wb') as f:
         f.write(r.content)
-
+    audioPath = '/home/fernando/Documents/audios/cat3.flac'
     # Retrieve HTTP meta-data
     print(r.status_code)
     print(r.headers['content-type'])
