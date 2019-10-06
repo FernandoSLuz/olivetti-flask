@@ -14,6 +14,9 @@ blueprint = flask.Blueprint('wassengerBackend', __name__)
 
 
 def sendWassengerMessage(phoneNumber, message):
+    print(phoneNumber)
+    print(message)
+    print("-------------------")
     import requests as req
     url = "https://api.wassenger.com/v1/messages"
     payload = "{\"phone\":\""+phoneNumber+"\",\"priority\":\"urgent\",\"message\":\""+message+"\"}"
@@ -41,13 +44,13 @@ def recievemessage():
     recievedPhone = ""
     if(form['data']['chat']['contact']['type']):
         if(str(form['data']['chat']['contact']['type']) == 'user'):
-            print("1")
+            #print("1")
             recievedMessage = str(form['data']['body'])
             recievedPhone = str(form['data']['fromNumber'])
-            print("message recieved")
+            #print("message recieved")
             #CHANGELATER
             dialogCallBackMessage = dfb.checkNumberStatus(recievedPhone, recievedMessage)
-            print(dialogCallBackMessage)
+            #print(dialogCallBackMessage)
             sendWassengerMessage(recievedPhone, dialogCallBackMessage)
             #sendMessageToWassenger(recievedPhoneStr, recievedMessage)
             return "200"

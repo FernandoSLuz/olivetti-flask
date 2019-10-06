@@ -14,8 +14,6 @@ from google.protobuf import struct_pb2
 blueprint = flask.Blueprint('dialogflowBackend', __name__)
 
 
-
-
 def checkNumberStatus(phoneRecieved, message):
     import requests as req
     url = "https://lighthouse-vms.appspot.com/users/check_status"
@@ -33,10 +31,6 @@ def checkNumberStatus(phoneRecieved, message):
     except:
         print(form)
         return ""
-
-
-
-
 
 @blueprint.route('/testintents_greetings', methods=[ 'POST'])
 def testintents_greetings():
@@ -129,10 +123,10 @@ def detect_intent_audio(project_id, session_id, language_code):
     url = 'https://api.wassenger.com/v1/io/5d9785b6036345001b5a85f8/files/5d98de1478a4b00028de8765/download?token=905bd94b9d3a26df733849887c838b9cc5ee1538b72fb1937edf027d5b7b71c71b2c54f1c894e4a2'
     r = reques.get(url)
 
-    audioPath = '/home/fernando/Documents/audios/cat3.ogg'
+    audioPath = '/home/fernando/olivetti/olivetti-flask/cat3.ogg'
     with open(audioPath, 'wb') as f:
         f.write(r.content)
-    operational.system("ftransc -f flac /home/fernando/Documents/audios/cat3.ogg")
+    operational.system("ftransc -f flac cat3.ogg")
     audioPath = '/home/fernando/Documents/audios/cat3.flac'
     # Retrieve HTTP meta-data
     print(r.status_code)
