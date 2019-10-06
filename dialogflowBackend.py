@@ -27,10 +27,10 @@ def checkNumberStatus(phoneRecieved, message):
     res = req.post(url, data=payload)
     form = res.json()
     res = (json.dumps(form, indent=3))
-    print(type(res))
-    phone = str(res['phone'])
-    message = str(res['profile']) + message
-    conversationId = str(res['conversationId'])
+    jsonRes = json.load(res)
+    phone = str(jsonRes['phone'])
+    message = str(jsonRes['profile']) + message
+    conversationId = str(jsonRes['conversationId'])
     dialogCallBackMessage =  detect_intent_texts("chatbot-olivetti", conversationId, message, "en-us", phone)
     return dialogCallBackMessage
 
