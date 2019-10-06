@@ -10,7 +10,7 @@ from flask import Blueprint
 import dialogflow
 from google.protobuf import struct_pb2
 import requests as req
-from wassengerBackend import wass
+
 
 blueprint = flask.Blueprint('dialogflowBackend', __name__)
 
