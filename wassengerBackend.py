@@ -52,7 +52,7 @@ def recievemessage():
     recievedPhone = ""
     if(form['data']['chat']['contact']['type']):
         if(str(form['data']['chat']['contact']['type']) == 'user'):
-            #print(res)
+            print("1")
             recievedMessage = str(form['data']['body'])
             recievedPhone = str(form['data']['fromNumber'])
             print("message recieved")
