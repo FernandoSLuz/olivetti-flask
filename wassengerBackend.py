@@ -52,6 +52,7 @@ def recievemessage():
             #print(res)
             recievedMessage = str(form['data']['body'])
             recievedPhone = str(form['data']['fromNumber'])
+            print("message recieved")
             #CHANGELATER
             dfb.checkNumberStatus(recievedPhone, recievedMessage)
             #sendMessageToWassenger(recievedPhoneStr, recievedMessage)
