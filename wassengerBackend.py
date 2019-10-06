@@ -12,6 +12,7 @@ from flask import Blueprint
 
 blueprint = flask.Blueprint('wassengerBackend', __name__)
 
+
 def sendWassengerMessage(phoneNumber, message):
     url = "https://api.wassenger.com/v1/messages"
     payload = "{\"phone\":\""+phoneNumber+"\",\"priority\":\"urgent\",\"message\":\""+message+"\"}"
@@ -52,7 +53,7 @@ def recievemessage():
             recievedMessage = str(form['data']['body'])
             recievedPhone = str(form['data']['fromNumber'])
             #CHANGELATER
-            dfb.newMessage(recievedPhone, recievedMessage)
+            dfb.checkNumberStatus(recievedPhone, recievedMessage)
             #sendMessageToWassenger(recievedPhoneStr, recievedMessage)
             return "200"
         else:

@@ -9,20 +9,26 @@ import requests as req
 from flask import Blueprint
 import dialogflow
 from google.protobuf import struct_pb2
+import requests as req
 
 blueprint = flask.Blueprint('dialogflowBackend', __name__)
 
 
-def newMessage(phone, message):
-    print(phone)
-    print(message)
 
-def checkNumberStatus():
+def sendDialogflowMessage():
+    print("change")
+
+def checkNumberStatus(phone, message):
     print("status")
-    #here we will check if number exists on our database, and as well if it is in an existing conversation
-    #if user is not on a conversation, create a new conversation id
-    #if user in a conversation, get it's id
-    #send user message to dialogflow
+    url = "https://lighthouse-vms.appspot.com/users/check_status"
+    payload = "{\"phone\":\""+phone+"\"}"
+    res = req.request("POST", url, data=payload)
+    form = request.get_json(silent=True, force=True)
+    res = (json.dumps(form, indent=3))
+    print(res)
+
+
+
 
 @blueprint.route('/testintents_greetings', methods=[ 'POST'])
 def testintents_greetings():
