@@ -25,7 +25,7 @@ def checkNumberStatus(phoneRecieved, message):
         'phone' : phoneRecieved
     }
     res = req.post(url, data=payload)
-    form = res.json(silent=True, force=True)
+    form = res.json()
     res = (json.dumps(form, indent=3))
     print(res)
 
