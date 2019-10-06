@@ -55,6 +55,7 @@ def recievemessage():
             print("message recieved")
             #CHANGELATER
             dialogCallBackMessage = dfb.checkNumberStatus(recievedPhone, recievedMessage)
+            print(dialogCallBackMessage)
             sendWassengerMessage(recievedPhone, dialogCallBackMessage)
             #sendMessageToWassenger(recievedPhoneStr, recievedMessage)
             return "200"
