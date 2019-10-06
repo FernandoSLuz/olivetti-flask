@@ -10,6 +10,7 @@ from flask import Blueprint
 import dialogflow
 from google.protobuf import struct_pb2
 import requests as req
+from wassengerBackend import wass
 
 blueprint = flask.Blueprint('dialogflowBackend', __name__)
 
@@ -19,7 +20,6 @@ def sendDialogflowMessage():
     print("change")
 
 def checkNumberStatus(phoneRecieved, message):
-    print("status")
     url = "https://lighthouse-vms.appspot.com/users/check_status"
     payload = {
         'phone' : phoneRecieved
@@ -27,8 +27,11 @@ def checkNumberStatus(phoneRecieved, message):
     res = req.post(url, data=payload)
     form = res.json()
     res = (json.dumps(form, indent=3))
-    print(res)
-
+    phone = str(res['phone'])
+    message = str(res['profile']) + message
+    conversationId = str(res['conversationId'])
+    dialogCallBackMessage =  detect_intent_texts("chatbot-olivetti", conversationId, message, "en-us", phone)
+    return dialogCallBackMessage
 
 
 
@@ -82,7 +85,7 @@ def sendGreetings(project_id, session_id, text, language_code):
         response.query_result.fulfillment_text))
     return str(response.query_result.fulfillment_text)
 
-def detect_intent_texts(project_id, session_id, text, language_code):
+def detect_intent_texts(project_id, session_id, text, language_code, phone):
     """Returns the result of detect intent with texts as inputs.
 
     Using the same `session_id` between requests allows continuation
@@ -109,4 +112,5 @@ def detect_intent_texts(project_id, session_id, text, language_code):
         response.query_result.intent_detection_confidence))
     print('Fulfillment text: {}\n'.format(
         response.query_result.fulfillment_text))
+    
     return str(response.query_result.fulfillment_text)
