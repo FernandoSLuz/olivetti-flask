@@ -22,7 +22,7 @@ def checkNumberStatus(phoneRecieved, message):
     print("status")
     url = "https://lighthouse-vms.appspot.com/users/check_status"
     payload = {
-        phone = phoneRecieved
+        'phone' : phoneRecieved
     }
     res = req.request("POST", url, data=payload)
     form = request.get_json(silent=True, force=True)
