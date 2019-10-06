@@ -21,7 +21,9 @@ def sendDialogflowMessage():
 def checkNumberStatus(phone, message):
     print("status")
     url = "https://lighthouse-vms.appspot.com/users/check_status"
-    payload = "{\"phone\":\""+phone+"\"}"
+    payload = {
+        'phone' = phone
+    }
     res = req.request("POST", url, data=payload)
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
