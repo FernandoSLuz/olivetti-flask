@@ -4,12 +4,11 @@ import time
 import json
 
 import flask
-from flask import request
-import requests as req
+
 from flask import Blueprint
 import dialogflow
 from google.protobuf import struct_pb2
-import requests as req
+
 
 
 blueprint = flask.Blueprint('dialogflowBackend', __name__)
@@ -20,12 +19,16 @@ def sendDialogflowMessage():
     print("change")
 
 def checkNumberStatus(phoneRecieved, message):
+    import requests as req
     url = "https://lighthouse-vms.appspot.com/users/check_status"
     payload = {
         'phone' : phoneRecieved
     }
     res = req.post(url, data=payload)
     form = res.json()
+    if(req.status_codes == 418):
+        print(form)
+        return ""
     phone = str(form['phone'])
     message = str(form['profile']) + " " + message
     conversationId = str(form['conversationId'])
@@ -36,6 +39,7 @@ def checkNumberStatus(phoneRecieved, message):
 
 @blueprint.route('/testintents_greetings', methods=[ 'POST'])
 def testintents_greetings():
+    from flask import request
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
     queryText = sendGreetings("chatbot-olivetti", str(form['sessionId']), str(form['message']), str(form['languageCode']))
@@ -46,6 +50,7 @@ def testintents_greetings():
 
 @blueprint.route('/testintents', methods=[ 'POST'])
 def testintents():
+    from flask import request
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
     

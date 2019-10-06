@@ -5,8 +5,8 @@ import json
 import dialogflowBackend as dfb
 
 import flask
-from flask import request
-import requests as req
+
+
 from flask import Blueprint
 
 
@@ -14,6 +14,7 @@ blueprint = flask.Blueprint('wassengerBackend', __name__)
 
 
 def sendWassengerMessage(phoneNumber, message):
+    import requests as req
     url = "https://api.wassenger.com/v1/messages"
     payload = "{\"phone\":\""+phoneNumber+"\",\"priority\":\"urgent\",\"message\":\""+message+"\"}"
     headers = {
@@ -27,6 +28,7 @@ def sendWassengerMessage(phoneNumber, message):
 
 @blueprint.route('/sendmessage', methods=[ 'POST'])
 def sendmessage():
+    from flask import request
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
     #print(res)
@@ -43,6 +45,7 @@ def sendmessage():
 
 @blueprint.route('/recieveWassengerMessage', methods=[ 'POST', 'GET' ])
 def recievemessage():
+    from flask import request
     form = request.get_json(silent=True, force=True)
     res = (json.dumps(form, indent=3))
     recievedMessage = ""
