@@ -120,7 +120,7 @@ def detect_intent_audio(project_id, session_id, language_code):
 
     print('Beginning file download with requests')
 
-    url = 'https://api.wassenger.com/v1/io/5d9785b6036345001b5a85f8/files/5d98de1478a4b00028de8765/download?token=905bd94b9d3a26df733849887c838b9cc5ee1538b72fb1937edf027d5b7b71c71b2c54f1c894e4a2'
+    url = 'WASSENGER URL HERE'
     r = reques.get(url)
 
     audioPath = '/home/fernando/olivetti/olivetti-flask/cat3.ogg'
